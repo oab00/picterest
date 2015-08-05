@@ -3,7 +3,7 @@
 angular.module('pinterestNewApp')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/collection', {
+      .when('/c/:user', {
         templateUrl: 'app/collection/collection.html',
         controller: 'CollectionCtrl'
       });

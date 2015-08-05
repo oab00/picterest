@@ -1,3 +1,49 @@
-<div class="col-md-12">
-This is the collection view.
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <p class="lead">Paste a link to an image to add it to your collection!</p>
+    <form ng-submit="addPicture()">
+      <div class="row">
+        <div class="col-xs-10">
+          <input class="form-control" ng-model="newPicture" />
+        </div>
+        <button class="btn btn-success col-xs-2">Submit</button>
+      </div>
+    </form>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header">{{title}}</h1>
+      <small ng-show="showDeleteButton">*click a picture to remove it</small>
+
+      <div class="collection_wall_container" masonry-wall-dir=".item" 
+          masonry-wall-options="{
+              gutter: 0, 
+              transitionDuration: '0.3s' }">
+          <div class="item" ng-repeat="picture in pictures" custom-directive masonry-item-dir> 
+              <img ng-src="{{picture.url}}" title="{{picture.user.name}}" ng-click="deletePicture($index)"
+                    onError="this.onerror=null;this.src='/assets/images/placeholder.png';" />
+
+              <div class="image-hover" ng-show="showDeleteButton">
+                <a ng-click="deletePicture($index)">Remove Image</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!--
+<footer class="footer">
+  <div class="container">
+      <p>
+        FreeCodeCamp Pinterest Basejump | 
+        <a href="http://github.com/oab00">@oab00</a>
+      </p>
+  </div>
+</footer>
+-->
