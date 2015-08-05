@@ -1,28 +1,68 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+  <div class="container" ng-show="loggedIn">
+    <p class="lead">Paste a link to an image to add it to your own collection!</p>
+    <form ng-submit="addPicture()">
+      <div class="row">
+        <div class="col-xs-10">
+          <input class="form-control" ng-model="newPicture" />
+        </div>
+        <button class="btn btn-success col-xs-2">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="container" ng-hide="loggedIn">
+    <p class="lead">Sign up or Login to add your own pictures!</p>
+    <a href="/signup"><button class="btn btn-success">Sign Up</button></a>
+    <a href="/login"><button class="btn btn-info">Login</button></a>
   </div>
 </header>
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
+    <div class="col-md-10">
+      <h1 class="page-header">
+        Everyone
+        <small ng-show="filterSelected !== false">filtered for {{filterSelected}}</small>
+      </h1>
+      <small>*click a picture to visit user's collection</small>
+
+      <div class="main_wall_container" masonry-wall-dir=".item" 
+          masonry-wall-options="{
+              gutter: 0, 
+              transitionDuration: '0.3s' }">
+          <div class="item" ng-repeat="picture in pictures" custom-directive masonry-item-dir> 
+              <img ng-src="{{picture.url}}" onError="this.onerror=null;this.src='/assets/images/placeholder.png';" />
+              
+              <div class="image-hover">
+                <a ng-href="/c/{{picture.user.name}}">{{picture.user.name}}'s Collection</a>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <h3 class="page-header">User Filters:</h3>
+      <ul>
+        <li ng-repeat="username in usernames">
+          <a href="" ng-click="filterSelect($index)"
+              ng-class="{ 'filtered': filterSelected === username }">{{username}}</a>
+        </li>
       </ul>
+      <button class="btn btn-primary" ng-click="clearFilter()">clear filter</button>
     </div>
   </div>
 </div>
 
+<!--
 <footer class="footer">
   <div class="container">
-      <p>Angular Fullstack v2.1.1 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+      <p>
+        FreeCodeCamp Pinterest Basejump | 
+        <a href="http://github.com/oab00">@oab00</a>
+      </p>
   </div>
 </footer>
+-->
