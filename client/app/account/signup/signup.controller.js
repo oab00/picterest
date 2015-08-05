@@ -8,9 +8,15 @@ angular.module('pinterestNewApp')
     $scope.register = function(form) {
       $scope.submitted = true;
 
+      if ($scope.user.email.match(/[\/]/g) !== null) {
+        alert('Found characters that are not allowed in the name.');
+        $scope.submitted = false;
+        return;
+      }
+
       if(form.$valid) {
         Auth.createUser({
-          name: $scope.user.name,
+          name: $scope.user.email,
           email: $scope.user.email,
           password: $scope.user.password
         })
