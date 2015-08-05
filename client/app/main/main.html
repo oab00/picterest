@@ -13,10 +13,18 @@
     </form>
   </div>
 
+  <!--
   <div class="container" ng-hide="loggedIn">
     <p class="lead">Sign up or Login to add your own pictures!</p>
     <a href="/signup"><button class="btn btn-success">Sign Up</button></a>
     <a href="/login"><button class="btn btn-info">Login</button></a>
+  </div>
+  -->
+
+  <div class="container">
+    
+    <div ng-hide="loggedIn" ng-include="'components/direct-login/direct-login.html'"></div>
+
   </div>
 </header>
 

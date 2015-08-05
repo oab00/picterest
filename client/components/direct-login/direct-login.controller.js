@@ -1,13 +1,32 @@
 'use strict';
 
 angular.module('pinterestNewApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location, $window) {
+  .controller('DirectLoginCtrl', function ($scope, $location, $timeout, $window, Auth) {
     $scope.user = {};
     $scope.errors = {};
+
+    $scope.login = function(form) {
+      $scope.submitted = true;
+
+      if(form.$valid) {
+        Auth.login({
+          email: $scope.user.email,
+          password: $scope.user.password
+        })
+        .then( function() {
+          // Logged in, redirect to home
+          $window.location.reload();
+        })
+        .catch( function(err) {
+          $scope.errors.other = err.message;
+        });
+      }
+    };
 
     $scope.register = function(form) {
       $scope.submitted = true;
 
+      console.log(form);
       if ($scope.user.email !== undefined && $scope.user.email.match(/[\/]/g) !== null) {
         alert('Found characters that are not allowed in the name.');
         return;
@@ -21,9 +40,10 @@ angular.module('pinterestNewApp')
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/');
+          $window.location.reload();
         })
         .catch( function(err) {
+          console.log(err);
           err = err.data;
           $scope.errors = {};
 
