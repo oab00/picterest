@@ -4,6 +4,9 @@ angular.module('pinterestNewApp')
   .controller('MainCtrl', function ($scope, $http, Auth, $timeout) {
     $scope.loggedIn = Auth.isLoggedIn();
     $timeout(function() { $scope.loggedIn = Auth.isLoggedIn(); }, 50);
+    $timeout(function() { $scope.loggedIn = Auth.isLoggedIn(); }, 500);
+    $timeout(function() { $scope.loggedIn = Auth.isLoggedIn(); }, 2500);
+    $timeout(function() { $scope.loggedIn = Auth.isLoggedIn(); }, 5000);
     $timeout(function() { $scope.loggedIn = Auth.isLoggedIn(); }, 10000);
     var user = Auth.getCurrentUser();
 
