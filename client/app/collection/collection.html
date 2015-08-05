@@ -25,7 +25,7 @@
               gutter: 0, 
               transitionDuration: '0.3s' }">
           <div class="item" ng-repeat="picture in pictures" custom-directive masonry-item-dir> 
-              <img ng-src="{{picture.url}}" title="{{picture.user.name}}" ng-click="deletePicture($index)"
+              <img ng-src="{{picture.url}}" ng-click="deletePicture($index)"
                     onError="this.onerror=null;this.src='/assets/images/placeholder.png';" />
 
               <div class="image-hover" ng-show="showDeleteButton">

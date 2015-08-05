@@ -40,8 +40,8 @@ h3.page-header {
 .main_wall_container .image-hover {
     display: none;
     position: absolute;
-    background: rgba(0, 0, 0, 0.5);
-    top: 0;
+    background: rgba(0, 0, 0, 0.7);
+    height: 100px;
     bottom: 0;
     left: 0;
     right: 0;
